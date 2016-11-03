@@ -13,8 +13,8 @@ def GetUrl(page=3):
 		urls.append(url)
 	return urls
 
-def GetPrices():
-	url_list = GetUrl()
+def GetPrices(page):
+	url_list = GetUrl(page)
 	for url in url_list:
 		wb_data = requests.get(url)
 		soup = BeautifulSoup(wb_data.text, 'lxml')
@@ -25,11 +25,16 @@ def GetPrices():
 				'price': int(price.get_text()),
 				'title': title.get_text()
 			}
+			print(data)
 			prices_tab.insert_one(data)
-		print('Done')
+	print('Done')
 
 for item in prices_tab.find({'price': {'$gte': 500}}):
 	print(item)
+
+#GetPrices(10)
+#prices_tab.drop()
+
 
 
 
