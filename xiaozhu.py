@@ -26,9 +26,10 @@ def GetPrices():
 				'title': title.get_text()
 			}
 			prices_tab.insert_one(data)
+		print('Done')
 
-
-GetPrices()
+for item in prices_tab.find({'price': {'$gte': 500}}):
+	print(item)
 
 
 
