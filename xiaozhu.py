@@ -29,8 +29,15 @@ def GetPrices(page):
 			prices_tab.insert_one(data)
 	print('Done')
 
-for item in prices_tab.find({'price': {'$gte': 500}}):
-	print(item)
+# for item in prices_tab.find({'price': {'$gte': 500}}):
+# 	print(item)
+
+# 另外一种判断价格大于500的方法
+for item in prices_tab.find():
+	if item['price'] >= 500:
+		print(item)
+
+
 
 #GetPrices(10)
 #prices_tab.drop()
